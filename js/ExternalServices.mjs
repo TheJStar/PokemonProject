@@ -17,7 +17,7 @@ export default class ExternalServices {
   async getData(category, offset, limit) {
     const response = await fetch(baseURL + `${category}/` + `?offset=${offset}&limit=${limit}`);
     const data = await convertToJson(response);
-    return data.results;
+    return data;
   }
   async findDataById(id, category=null) {
     if (category != null) {

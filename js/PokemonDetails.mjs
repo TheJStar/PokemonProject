@@ -17,6 +17,14 @@ export default class PokemonDetails {
         this.renderPokemonDetails("main");
 
         this.extendOrCollaps();
+
+        const favorite = qs("#fav")
+        favorite.addEventListener("click", () => {
+            favorite.classList.toggle("notfavorite")
+            favorite.classList.toggle("favorite")
+            this.addToFavorites();
+        })
+
         console.log(this.pokemon);
         //console.log(this.pokemonEvoChain.chain.species.name)// this is what you should use to catch pokemon because you don't find eveloved stuff in some areas maybe
         //console.log(this.pokemonSpecies.flavor_text_entries.length) // make the flavor text choosable by a drop down maybe
@@ -28,24 +36,55 @@ export default class PokemonDetails {
 
         let types = `<ul class="collapsed">`
         this.pokemon.types.forEach(type => {
-            types += `<li><a href="../moves-abilties/?category=${type.type.url.split("/")[type.type.url.split("/").length - 3]}&id=${type.type.url.split("/")[type.type.url.split("/").length - 2]}">${type.type.name}</a></li>`
+            types += `<li>
+                <a href="../moves-abilties/?category=${type.type.url.split("/")[type.type.url.split("/").length - 3]}&id=${type.type.url.split("/")[type.type.url.split("/").length - 2]}">
+                    ${type.type.name}
+                </a>
+            </li>`
         });
         types += `</ul>`
         let abilities = `<ul class="collapsed">`
         this.pokemon.abilities.forEach(ability => {
-            abilities += `<li><a href="../moves-abilties/?category=${ability.ability.url.split("/")[ability.ability.url.split("/").length - 3]}&id=${ability.ability.url.split("/")[ability.ability.url.split("/").length - 2]}">${ability.ability.name}</a></li>`
+            abilities += `<li>
+                <a href="../moves-abilties/?category=${ability.ability.url.split("/")[ability.ability.url.split("/").length - 3]}&id=${ability.ability.url.split("/")[ability.ability.url.split("/").length - 2]}">
+                    ${ability.ability.name}
+                </a>
+            </li>`
         });
         abilities += `</ul">`
         let moves = `<ul class="collapsed">`
         this.pokemon.moves.forEach(move => {
-            moves += `<li><a href="../moves-abilties/?category=${move.move.url.split("/")[move.move.url.split("/").length - 3]}&id=${move.move.url.split("/")[move.move.url.split("/").length - 2]}">${move.move.name}</a></li>`
+            moves += `<li>
+                <a href="../moves-abilties/?category=${move.move.url.split("/")[move.move.url.split("/").length - 3]}&id=${move.move.url.split("/")[move.move.url.split("/").length - 2]}">
+                    ${move.move.name}
+                </a>
+            </li>`
         });
         moves += `</ul>`
         let stats = `<ul class="collapsed">`
         this.pokemon.stats.forEach(stat => {
-            stats += `<li>${toProperCase(stat.stat.name)}: ${stat.base_stat} - Effort: ${stat.effort}</li>`
+            stats += `<li>
+                ${toProperCase(stat.stat.name)}: ${stat.base_stat} - Effort: ${stat.effort}
+            </li>`
         });
         stats += `</ul>`
+
+        let evo = this.pokemonEvoChain.chain
+        let evoChain = `<ul class="collapsed">`
+        evoChain += `<li>
+            <a href="../pokemon-page/?category=${"pokemon"}&pokemonId=${evo.species.url.split("/")[evo.species.url.split("/").length - 2]}">
+                ${evo.species.name}
+            </a>
+        </li>`
+        while (evo.evolves_to.length > 0) {
+            evoChain += `<li>
+                <a href="../pokemon-page/?category=${"pokemon"}&pokemonId=${evo.evolves_to[0].species.url.split("/")[evo.evolves_to[0].species.url.split("/").length - 2]}">
+                    ${evo.evolves_to[0].species.name}
+                </a>
+            </li>`
+            evo = evo.evolves_to[0]
+        }
+        evoChain += `</ul>`
 
         let img;
         if (this.pokemon.sprites.front_default == null) {
@@ -53,9 +92,16 @@ export default class PokemonDetails {
         }else{
             img = this.pokemon.sprites.front_default
         }
+
+        let inBackpack = "notfavorite";
+        if (this.checkBackpack()) {
+            inBackpack = "favorite"
+        } else {
+            inBackpack = "notfavorite"
+        }
         const html = `
             <section class="pokemon-detail">
-                <h2>${toProperCase(this.pokemon.name)}</h2>
+                <h2>${toProperCase(this.pokemon.name)}<button id="fav" class="${inBackpack}">Favorite</button></h2>
 
                 <img
                 class=""
@@ -72,7 +118,11 @@ export default class PokemonDetails {
                 <div class="collapsible">
                     <h4 class="extend">Type</h4>
                     ${types}
-                </div> 
+                </div>
+                <div class="collapsible">
+                    <h4 class="extend">Evolution Chain</h4>
+                    ${evoChain}
+                </div>
                 <div class="collapsible">
                     <h4 class="extend">Stats</h4>
                     ${stats}
@@ -105,5 +155,27 @@ export default class PokemonDetails {
                 element.children[0].classList.toggle("extend");
             })
         }); 
+    }
+    addToFavorites() {
+        let backpack = getLocalStorage("backpack");
+
+        if (!Array.isArray(backpack)) {
+            backpack = [];
+        }
+
+        if (!this.checkBackpack()) {
+            backpack.push(this.pokemon)
+        } else {
+            backpack.pop(this.pokemon)
+        }
+        setLocalStorage("backpack", backpack)
+    }
+    checkBackpack() {
+        let backpack = getLocalStorage("backpack");
+
+        if (!Array.isArray(backpack)) {
+            backpack = [];
+        }
+        return backpack.some((obj) => obj.id === this.pokemon.id)
     }
 }

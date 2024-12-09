@@ -1,5 +1,5 @@
 import ExternalServices from "./ExternalServices.mjs";
-import PokemonDetails from "./PokemonDetails.mjs";
+import { MiscLinks } from "./MiscLink.mjs";
 import {
   getParams,
   loadHeaderFooter,
@@ -7,10 +7,10 @@ import {
 
 
 // add an mjs to get moves in a different page
-const category = "move"    
-const moveId = getParams("moveId");
+const category = getParams("category")   
+const id = getParams("id");
 const datasource = new ExternalServices(category);
-const pokemon = new PokemonDetails(moveId, datasource);
+const page = new MiscLinks(id, category, datasource);
 
-pokemon.init();
+page.init();
 loadHeaderFooter();

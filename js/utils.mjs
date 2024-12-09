@@ -53,17 +53,20 @@ export function qs(selector, parent = document) {
   }
   
   export async function loadHeaderFooter() {
-    //Load the header and footer templates in from our partials
+    //Load the header and footer and nav templates in from our partials
     const headerTemplate = await loadTemplate("../partials/header.html");
     const footerTemplate = await loadTemplate("../partials/footer.html");
+    const navTemplate = await loadTemplate("../partials/nav.html");
   
-    // Grab the header and footer elements out of the DOM.
+    // Grab the header and footer and nav elements out of the DOM.
     const headerElement = qs("header");
     const footerElement = qs("footer");
+    const navElement = qs("nav");
   
-    // Render the header and footer
+    // Render the header and footer and nav
     renderWithTemplate(headerTemplate, headerElement);
     renderWithTemplate(footerTemplate, footerElement);
+    renderWithTemplate(navTemplate, navElement);
   }
   
   async function loadTemplate(path) {
