@@ -1,13 +1,14 @@
 import ExternalServices from "./ExternalServices.mjs";
-import PokemonList from "./PokemonList.mjs";
+import PokemonDetails from "./PokemonDetails.mjs";
 import {
   getParams,
   loadHeaderFooter,
 } from "./utils.mjs";
 
 const category = "pokemon"    
+const pokemonId = getParams("pokemonId");
 const datasource = new ExternalServices(category);
-const pokemon = new PokemonList(datasource, 1000, 1302, category);
+const pokemon = new PokemonDetails(pokemonId, datasource);
 
 pokemon.init();
 loadHeaderFooter();

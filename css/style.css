@@ -1,0 +1,197 @@
+:root {
+    --background-color: rgb(59, 59, 59);
+    --second-forground-color: rgb(228, 228, 228);
+    --accent-color: rgb(255, 255, 255);
+    --text-color: black;
+}
+
+header {
+    height: 4rem;
+    background-color: var(--background-color);
+    color: var(--second-forground-color);
+}
+.logo {
+    padding-left: 1rem;
+    height: 100%;
+    align-content: center;
+    font-size: larger;
+}
+.logo a {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+h2 {
+    padding-left: 1rem;
+}
+main {
+    align-items: center;
+    /* display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(176px, 1fr) ); */
+}
+/* web componants */
+.block {
+    padding: 1rem;
+    background-color: var(--second-forground-color);
+}
+.divider {
+    border-bottom: 3px var(--text-color) solid;
+}
+
+/* collapsable lists */
+.collapsible {
+    display: block;
+    
+}
+.collapsible h4 {
+    padding: 1rem;
+    user-select: none;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--accent-color);
+}
+.collapsible ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+.collapsible ul a {
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+.collapsible ul li {
+    padding: 0.5rem 2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+.collapsed {
+    display: none;
+}
+.extend::after {
+    content: "+";
+    position: relative;
+    left: 10px;
+}
+.collaps::after {
+    content: "-";
+    position: relative;
+    left: 10px;
+}
+/* Pokemon */
+/*      Cards */
+.pokemon-cards {
+    margin: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px var(--second-forground-color);
+    transition: box-shadow 1s;
+    max-width: 320px;
+}
+.pokemon-cards:hover {
+    box-shadow: 0 0 20px var(--background-color);
+    transition: box-shadow 1s;
+}
+
+.pokemon-cards img {
+    width: 100%;
+    max-height: 250px;
+    image-rendering: pixelated;
+}
+.pokemon-cards ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.pokemon-cards ul li {
+    margin: 2px;
+}
+.pokemon-cards ul li a {
+    color: var(--accent-color);
+}
+/* .pokemon-cards:nth-child(even) {
+    background-color: var(--second-forground-color);
+} */
+.pokemon-cards a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.2rem;
+}
+/* Pokemon type markups */
+.normal::before {
+    content: "⬛";
+}
+.fire::before {
+    content: "🔥";
+}
+.water::before {
+    content: "💦";
+}
+.electric::before {
+    content: "⚡";
+}
+.grass::before {
+    content: "🌿";
+}
+.ice::before {
+    content: "❄️";
+}
+.fighting::before {
+    content: "🥷";
+}
+.poison::before {
+    content: "🟢";
+}
+.ground::before {
+    content: "🟫";
+}
+.flying::before {
+    content: "🪶";
+}
+.psychic::before {
+    content: "🧠";
+}
+.bug::before {
+    content: "🐛";
+}
+.rock::before {
+    content: "🪨";
+}
+.ghost::before {
+    content: "👻";
+}
+.dragon::before {
+    content: "🐲";
+}
+.dark::before {
+    content: "🌑";
+}
+.steel::before {
+    content: "🤘";
+}
+.fairy::before {
+    content: "🧚";
+}
+/*      Details */
+.pokemon-detail {
+    margin: auto;
+    max-width: 700px;
+    border: 0.2rem solid var(--background-color);
+}
+.pokemon-detail img {
+    display: block;
+    margin: auto;
+    width: 344px;
+    image-rendering: pixelated;
+}
