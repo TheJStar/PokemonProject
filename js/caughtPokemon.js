@@ -10,4 +10,12 @@ const datasource = new ExternalServices(category);
 const caugthPokemon = new CaugthPokemon(datasource, category);
 
 caugthPokemon.init();
-loadHeaderFooter();
+loadHeaderFooter(() => {
+  const dropdown = qs(".nav-dropdown")
+  const nav = qs("nav")
+
+  dropdown.addEventListener("click", () => {
+  nav.classList.toggle("collapsed");
+  console.log("clicked")
+})
+});

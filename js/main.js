@@ -13,4 +13,12 @@ const catchPokemon = new CatchPokemon(datasource, category);
 const button = document.querySelector("#catch");
 
 catchPokemon.init(".tall-grass");
-loadHeaderFooterMain();
+loadHeaderFooterMain(() => {
+  const dropdown = qs(".nav-dropdown")
+  const nav = qs("nav")
+
+  dropdown.addEventListener("click", () => {
+  nav.classList.toggle("collapsed");
+  console.log("clicked")
+})
+});

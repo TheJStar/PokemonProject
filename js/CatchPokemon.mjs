@@ -68,8 +68,10 @@ export default class CatchPokemon {
                         alt="picture of ${this.pokemon.name}"
                     >
                 </a>
-                <button id="catch">Catch</button>
-                <a href="./" id="look-around">Look Around</a>
+                <div>
+                    <button id="catch">Catch</button>
+                    <a href="./" id="look-around">Look Around</a>
+                </div>
                 ${types}
             </section>
         `

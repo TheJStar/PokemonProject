@@ -9,14 +9,35 @@ html * {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     height: 4rem;
     background-color: var(--background-color);
     color: var(--second-forground-color);
+
+    display: flex;
+}
+
+nav {
+    background-color: var(--second-forground-color);
+    margin-bottom: 0.5rem;
+    justify-items: center;
 }
 nav ul {
     list-style: none;
     display: flex;
+    padding: 0;
 }
 nav li {
     margin: 0.3rem;
@@ -29,6 +50,14 @@ nav a {
     text-decoration: none;
     color: var(--background-color);
 }
+
+footer {
+    border-top: 0.3rem solid var(--background-color);
+    background-color: var(--second-forground-color);
+    padding: 1rem;
+    margin-top: auto;
+}
+
 .logo {
     padding-left: 1rem;
     height: 100%;
@@ -39,17 +68,13 @@ nav a {
     text-decoration: none;
     color: var(--accent-color);
 }
-
-body {
-    padding: 0;
-    margin: 0;
-}
 h2 {
     padding-left: 1rem;
 }
 main {
-    align-items: center;
+    justify-items: center;
     padding: 0.5rem;
+    grid-gap: 1rem;
     /* display: grid;
     grid-template-columns: repeat( auto-fill, minmax(176px, 1fr) ); */
 }
@@ -60,6 +85,8 @@ input {
     border: 2px solid var(--background-color);
     border-radius: 0.5rem;
     height: 2rem;
+    margin: 0.5rem 1rem;
+    padding: 0 0.5rem;
 }
 /* web componants */
 .block {
@@ -142,17 +169,27 @@ input {
 /* Pokemon */
 /*      Cards */
 .pokemon-cards, .pokemon-caught {
-    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
     border-radius: 1.3rem;
     box-shadow: 0 0 10px var(--second-forground-color);
     transition: box-shadow 1s;
+
     max-width: 320px;
+    min-width: fit-content;
+    height: 100%;
 }
 .pokemon-cards:hover, .pokemon-caught:hover {
     box-shadow: 0 0 20px var(--background-color);
     transition: box-shadow 1s;
 }
 
+.pokemon-cards h2, .pokemon-caught h2 {
+    padding: 0;
+    margin: 1rem;
+    font-size: medium;
+}
 .pokemon-cards img, .pokemon-caught img {
     width: 100%;
     image-rendering: pixelated;
@@ -160,7 +197,7 @@ input {
 .pokemon-cards ul, .pokemon-caught ul {
     display: flex;
     list-style: none;
-    margin: 0;
+    margin: auto 0 0 0;
     padding: 0.5rem;
     background-color: var(--background-color);
     border-bottom-right-radius: 1rem;
@@ -179,6 +216,11 @@ input {
     color: var(--text-color);
     padding: 0.2rem;
 }
+.pokemon-caught {
+    min-width: 320px;
+}
+
+
 #look-around {
     display: inline;
     margin: 1rem;
@@ -200,6 +242,10 @@ input {
     border-radius: 0.1rem;
 }
 .pokemon-caught button {
+    display: inline;
+
+    width: fit-content;
+    
     margin: 1rem;
     padding: 1rem;
     color: white;
@@ -288,3 +334,19 @@ input {
 .favorite::after {
     content: "🔴";
 }
+
+@media only screen and (max-width: 600px) {
+    .nav-dropdown {
+        width: fit-content;
+        height: fit-content;
+        padding: 1rem;
+        margin-left:  auto;
+        margin-top: auto;
+        line-height: 100%;
+        vertical-align: middle;
+    }
+    .nav-dropdown::before {
+        content: "☰";
+        font-size: xx-large;
+    }
+  }

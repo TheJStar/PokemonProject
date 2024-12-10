@@ -69,7 +69,7 @@ export function qs(selector, parent = document) {
     renderWithTemplate(navTemplate, navElement);
   }
 
-  export async function loadHeaderFooterMain() {
+  export async function loadHeaderFooterMain(callback=null) {
     //Load the header and footer and nav templates in from our partials
     const headerTemplate = await loadTemplate("./partials/header.html");
     const footerTemplate = await loadTemplate("./partials/footer.html");
@@ -84,6 +84,9 @@ export function qs(selector, parent = document) {
     renderWithTemplate(headerTemplate, headerElement);
     renderWithTemplate(footerTemplate, footerElement);
     renderWithTemplate(navTemplate, navElement);
+    if (callback) {
+      callback()
+    }
   }
   
   async function loadTemplate(path) {

@@ -14,7 +14,15 @@ const pokemon = new PokemonList(datasource, offset, limit, category);
 const searchbar = document.querySelector("#search");
 
 pokemon.init();
-loadHeaderFooter();
+loadHeaderFooter(() => {
+  const dropdown = qs(".nav-dropdown")
+  const nav = qs("nav")
+
+  dropdown.addEventListener("click", () => {
+  nav.classList.toggle("collapsed");
+  console.log("clicked")
+})
+});
 
 searchbar.addEventListener("change", async ()=> {
     pokemon.renderPokemonsBySearch("main", searchbar.value);
