@@ -177,7 +177,8 @@ input {
     box-shadow: 0 0 10px var(--second-forground-color);
     transition: box-shadow 1s;
 
-    max-width: 320px;
+    width: 100%;
+    /* max-width: 320px; */
     min-width: fit-content;
     height: 100%;
 }
