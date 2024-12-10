@@ -1,4 +1,4 @@
-import CaugthPokemon from "./CaugthPokemon.mjs";
+import Backpack from "./Backpack.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import {
   getParams,
@@ -7,7 +7,7 @@ import {
 
 const category = "pokemon";
 const datasource = new ExternalServices(category);
-const caugthPokemon = new CaugthPokemon(datasource, category);
+const backpack = new Backpack(datasource, category);
 
-caugthPokemon.init();
+backpack.init();
 loadHeaderFooter();

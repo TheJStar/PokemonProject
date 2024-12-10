@@ -141,24 +141,24 @@ input {
 }
 /* Pokemon */
 /*      Cards */
-.pokemon-cards {
+.pokemon-cards, .pokemon-caught {
     margin: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 1.3rem;
     box-shadow: 0 0 10px var(--second-forground-color);
     transition: box-shadow 1s;
     max-width: 320px;
 }
-.pokemon-cards:hover {
+.pokemon-cards:hover, .pokemon-caught:hover {
     box-shadow: 0 0 20px var(--background-color);
     transition: box-shadow 1s;
 }
 
-.pokemon-cards img {
+.pokemon-cards img, .pokemon-caught img {
     width: 100%;
     
     image-rendering: pixelated;
 }
-.pokemon-cards ul {
+.pokemon-cards ul, .pokemon-caught ul {
     display: flex;
     list-style: none;
     margin: 0;
@@ -167,23 +167,33 @@ input {
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
 }
-.pokemon-cards ul li {
+.pokemon-cards ul li, .pokemon-caught ul li {
     margin: 2px;
 }
-.pokemon-cards ul li a {
+.pokemon-cards ul li a, .pokemon-caught ul li a {
     color: var(--accent-color);
 }
-/* .pokemon-cards:nth-child(even) {
-    background-color: var(--second-forground-color);
-} */
-.pokemon-cards a {
+.pokemon-cards a, .pokemon-caught a {
     display: block;
     width: 100%;
     text-decoration: none;
     color: var(--text-color);
     padding: 0.2rem;
 }
+#look-around:hover {
+    color: rgb(0, 134, 134);
+}
+#look-around::before {
+    content: "🌏";
+}
+.pokemon-caught button {
+    margin: 1rem;
+}
 /* Pokemon type markups */
+.shiny {
+    border: 0.3rem solid gold;
+}
+
 .normal::before {
     content: "⬛";
 }

@@ -166,7 +166,13 @@ export default class PokemonDetails {
         if (!this.checkBackpack()) {
             backpack.push(this.pokemon)
         } else {
-            backpack.pop(this.pokemon)
+            let i = 0;
+            while (i < backpack.length && backpack[i].id != this.pokemon.id) {
+                i++
+            }
+            if (i < backpack.length) {
+                backpack.splice(i, 1)
+            }
         }
         setLocalStorage("backpack", backpack)
     }
