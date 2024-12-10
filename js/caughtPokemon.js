@@ -3,6 +3,7 @@ import ExternalServices from "./ExternalServices.mjs";
 import {
   getParams,
   loadHeaderFooter,
+  qs,
 } from "./utils.mjs";
 
 const category = "pokemon";
@@ -15,7 +16,6 @@ loadHeaderFooter(() => {
   const nav = qs("nav")
 
   dropdown.addEventListener("click", () => {
-  nav.classList.toggle("collapsed");
-  console.log("clicked")
-})
+    nav.classList.toggle("collapsed");
+  })
 });

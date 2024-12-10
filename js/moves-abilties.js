@@ -3,6 +3,7 @@ import { MiscLinks } from "./MiscLink.mjs";
 import {
   getParams,
   loadHeaderFooter,
+  qs,
 } from "./utils.mjs";
 
 
@@ -19,6 +20,5 @@ loadHeaderFooter(() => {
 
   dropdown.addEventListener("click", () => {
     nav.classList.toggle("collapsed");
-    console.log("clicked")
-})
+  })
 });

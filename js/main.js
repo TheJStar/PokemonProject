@@ -18,7 +18,6 @@ loadHeaderFooterMain(() => {
   const nav = qs("nav")
 
   dropdown.addEventListener("click", () => {
-  nav.classList.toggle("collapsed");
-  console.log("clicked")
-})
+    nav.classList.toggle("collapsed");
+  })
 });

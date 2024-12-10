@@ -3,6 +3,7 @@ import PokemonList from "./PokemonList.mjs";
 import {
   getParams,
   loadHeaderFooter,
+  qs,
 } from "./utils.mjs";
 
 const offset = getParams("offset")
@@ -19,9 +20,8 @@ loadHeaderFooter(() => {
   const nav = qs("nav")
 
   dropdown.addEventListener("click", () => {
-  nav.classList.toggle("collapsed");
-  console.log("clicked")
-})
+    nav.classList.toggle("collapsed");
+  })
 });
 
 searchbar.addEventListener("change", async ()=> {

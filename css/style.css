@@ -33,6 +33,7 @@ nav {
     background-color: var(--second-forground-color);
     margin-bottom: 0.5rem;
     justify-items: center;
+    user-select: none;
 }
 nav ul {
     list-style: none;
