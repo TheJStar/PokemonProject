@@ -4,6 +4,7 @@ import {
   getParams,
   loadHeaderFooter,
   qs,
+  loadHeaderFooterMain,
 } from "./utils.mjs";
 
 const category = "pokemon"

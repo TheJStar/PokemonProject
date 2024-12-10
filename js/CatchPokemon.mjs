@@ -69,7 +69,7 @@ export default class CatchPokemon {
                     >
                 </a>
                 <button id="catch">Catch</button>
-                <a href="/" id="look-around">Look Around</a>
+                <a href="./" id="look-around">Look Around</a>
                 ${types}
             </section>
         `
