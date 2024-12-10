@@ -12,4 +12,4 @@ const catchPokemon = new CatchPokemon(datasource, category);
 const button = document.querySelector("#catch");
 
 catchPokemon.init(".tall-grass");
-loadHeaderFooter();
+loadHeaderFooterMain();
