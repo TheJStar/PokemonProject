@@ -60,7 +60,7 @@ export default class CatchPokemon {
         }
         const html = `
             <section class="pokemon-caught ${shinyClass}">
-                <a href="../pokemon-page/?category=${this.category}&pokemonId=${this.pokemon.id}">
+                <a href="./pokemon-page/?category=${this.category}&pokemonId=${this.pokemon.id}">
                     <h2>${toProperCase(this.pokemon.name)}</h2>
                     <img 
                         class=""
