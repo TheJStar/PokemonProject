@@ -179,14 +179,33 @@ input {
     color: var(--text-color);
     padding: 0.2rem;
 }
+#look-around {
+    display: inline;
+    margin: 1rem;
+    padding: 1rem;
+    border: 0.2rem var(--background-color) solid;
+    color: white;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+    width: fit-content;
+    font-size: small;
+}
 #look-around:hover {
     color: rgb(0, 134, 134);
 }
-#look-around::before {
-    content: "🌏";
+#look-around::after {
+    margin: 0.2rem;
+    content: "🐾";
+    background-color: aliceblue;
+    border-radius: 0.1rem;
 }
 .pokemon-caught button {
     margin: 1rem;
+    padding: 1rem;
+    color: white;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+    font-size: small;
 }
 /* Pokemon type markups */
 .shiny {
