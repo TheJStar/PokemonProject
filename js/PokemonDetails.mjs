@@ -9,11 +9,13 @@ export default class PokemonDetails {
         this.pokemonSpecies = {};
         this.pokemonEvoChain = {};
         this.pokemonMoves = {};
+        this.pokemonLocation = {};
     }
     async init() {
         this.pokemon = await this.datasource.findDataById(this.pokemonId);
         this.pokemonSpecies = await this.datasource.findDataByURL(this.pokemon.species.url);
         this.pokemonEvoChain = await this.datasource.findDataByURL(this.pokemonSpecies.evolution_chain.url);
+        this.pokemonLocation = await this.datasource.findDataByURL(this.pokemon.location_area_encounters);
         this.renderPokemonDetails("main");
 
         this.extendOrCollaps();
@@ -68,6 +70,26 @@ export default class PokemonDetails {
             </li>`
         });
         stats += `</ul>`
+        let locations = `<ul class="collapsed">`
+        this.pokemonLocation.forEach(location => {
+            locations += `<li>
+                <a href="../moves-abilties/?category=${location.location_area.url.split("/")[location.location_area.url.split("/").length - 3]}&id=${location.location_area.url.split("/")[location.location_area.url.split("/").length - 2]}">
+                ${toProperCase(location.location_area.name)}
+                </a>
+            </li>`
+        });
+        locations += `</ul>`
+
+
+        let sprites = `<ul class="collapsed">`
+        for (let key in this.pokemon.sprites) {
+            if (key != "other" && key != "version") {
+                sprites += `<li>
+                    ${key}: ${this.pokemon.sprites[key]}
+                </li>`
+            }
+        }
+        sprites += `</ul>`
 
         let evo = this.pokemonEvoChain.chain
         let evoChain = `<ul class="collapsed">`
@@ -90,7 +112,11 @@ export default class PokemonDetails {
         if (this.pokemon.sprites.front_default == null) {
             img = "../images/image-missing.png"
         }else{
-            img = this.pokemon.sprites.front_default
+            if (this.pokemon.shiny) {
+                img = this.pokemon.sprites.front_shiny
+            } else {
+                img = this.pokemon.sprites.front_default
+            }
         }
 
         let inBackpack = "notfavorite";
@@ -114,6 +140,12 @@ export default class PokemonDetails {
                     <p class="">${this.pokemonSpecies.flavor_text_entries[0].flavor_text}</p>
                     <p class="">Height: ${this.pokemon.height/10}m</p>
                     <p class="">Weight: ${this.pokemon.weight/10}kg</p>
+                    <p class="">Capture Rate: ${this.pokemonSpecies.capture_rate}kg</p>
+                    <p class="">Capture Rate: ${this.pokemon.base_experience}kg</p>
+                </div>
+                <div class="collapsible">
+                    <h4 class="extend">Sprites</h4>
+                    ${sprites}
                 </div>
                 <div class="collapsible">
                     <h4 class="extend">Type</h4>
@@ -135,6 +167,10 @@ export default class PokemonDetails {
                     <h4 class="extend">Moves</h4>
                     ${moves}
                 </div>
+                <div class="collapsible">
+                    <h4 class="extend">Encounter Locations</h4>
+                    ${locations}
+                </div>  
             </section>
         ` // you can get flavor text and evolution chain from versions in the /pokemon-species/id/
         renderWithTemplate(html, element)
@@ -176,12 +212,29 @@ export default class PokemonDetails {
         }
         setLocalStorage("backpack", backpack)
     }
-    checkBackpack() {
-        let backpack = getLocalStorage("backpack");
+    checkBackpack(key="backpack") {
+        let backpack = getLocalStorage(key);
 
         if (!Array.isArray(backpack)) {
             backpack = [];
         }
         return backpack.some((obj) => obj.id === this.pokemon.id)
+    }
+    isShiny(key, poke) {
+        // if you caught a shiny version of it it will show shiny in the pokemon details page
+        let backpack = getLocalStorage(key);
+        let shiny = false;
+        if (!Array.isArray(backpack)) {
+            backpack = [];
+        }
+        backpack.forEach(obj => {
+            if (obj.id === poke.id) {
+                if (obj.shiny) {
+                    shiny = true
+                    return shiny
+                }
+            }
+        });
+        return shiny
     }
 }
