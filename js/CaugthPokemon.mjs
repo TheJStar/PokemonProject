@@ -30,17 +30,19 @@ export default class CaugthPokemon {
             types += `</ul>`
             
             let img;
+            let shinyClass = "";
             if (pokemon.sprites.front_default == null) {
                 img = "../images/image-missing.png"
             }else{
                 if (pokemon.shiny) {
                     img = pokemon.sprites.front_shiny
+                    shinyClass = "shiny"
                 } else {
                     img = pokemon.sprites.front_default
                 }
             }
             const html = `
-                <section class="pokemon-cards">
+                <section class="pokemon-cards ${shinyClass}">
                     <a href="../pokemon-page/?category=${this.category}&pokemonId=${pokemon.id}">
                         <h2>${toProperCase(pokemon.name)}</h2>
                         <img 

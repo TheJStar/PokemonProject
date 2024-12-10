@@ -50,7 +50,6 @@ h2 {
 main {
     align-items: center;
     padding: 0.5rem;
-    perspective: 400px;
     /* display: grid;
     grid-template-columns: repeat( auto-fill, minmax(176px, 1fr) ); */
 }
@@ -147,25 +146,15 @@ input {
     border-radius: 1.3rem;
     box-shadow: 0 0 10px var(--second-forground-color);
     transition: box-shadow 1s;
-    transition: transform 0.5s;
     max-width: 320px;
 }
 .pokemon-cards:hover, .pokemon-caught:hover {
     box-shadow: 0 0 20px var(--background-color);
     transition: box-shadow 1s;
-    transform: rotate3d(1, 0, 0, 3deg);
-    transition: transform 0.5s;
 }
-/* .pokemon-cards img:hover, .pokemon-caught img:hover {
-    width: 100%;
-    transform: rotate3d(1, 0, 0, 45deg);
-    image-rendering: pixelated;
-    transition: transform 0.5s;
-} */
 
 .pokemon-cards img, .pokemon-caught img {
     width: 100%;
-    transition: transform 0.5s;
     image-rendering: pixelated;
 }
 .pokemon-cards ul, .pokemon-caught ul {
