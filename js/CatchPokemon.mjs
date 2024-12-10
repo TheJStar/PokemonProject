@@ -49,7 +49,7 @@ export default class CatchPokemon {
         let img;
         let shinyClass = "";
         if (this.pokemon.sprites.front_default == null) {
-            img = "../images/image-missing.png"
+            img = "./images/image-missing.png"
         }else{
             if (this.pokemon.shiny) {
                 img = this.pokemon.sprites.front_shiny
