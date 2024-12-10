@@ -140,8 +140,8 @@ export default class PokemonDetails {
                     <p class="">${this.pokemonSpecies.flavor_text_entries[0].flavor_text}</p>
                     <p class="">Height: ${this.pokemon.height/10}m</p>
                     <p class="">Weight: ${this.pokemon.weight/10}kg</p>
-                    <p class="">Capture Rate: ${this.pokemonSpecies.capture_rate}kg</p>
-                    <p class="">Capture Rate: ${this.pokemon.base_experience}kg</p>
+                    <p class="">Capture Rate: ${this.pokemonSpecies.capture_rate}</p>
+                    <p class="">Base Experience: ${this.pokemon.base_experience}</p>
                 </div>
                 <div class="collapsible">
                     <h4 class="extend">Sprites</h4>
