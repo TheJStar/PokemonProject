@@ -31,19 +31,31 @@ export default class CatchPokemon {
 
         this.renderPokemon(selector);
 
+        // pokemon captureing system
+        const pokemonToCatch = qs(".pokemon-caught")
+
         let captureAmount = 3;
+        const pokeballAmount = qs("#pokeball-amount")
+        pokeballAmount.innerHTML = `Pokeballs: ${captureAmount}`
 
         const catchButton = qs("#catch");
         catchButton.addEventListener("click", () => {
             if (captureAmount > 0) {
                 let captured = this.capturePokemon()
                 if (captured) {
-                    this.reset()
+                    pokemonToCatch.classList.add("capture")
+                    setTimeout(()=>{pokemonToCatch.classList.remove("capture")}, 500)
+                    this.reset();
+                } else {
+                    pokemonToCatch.classList.add("shake")
+                    setTimeout(()=>{pokemonToCatch.classList.remove("shake")}, 500)
                 }
             } else {
-                this.reset()
+                pokemonToCatch.classList.add("escape")
+                setTimeout(()=>{pokemonToCatch.classList.remove("escape");this.reset();}, 500)
             }
             captureAmount--
+            pokeballAmount.innerHTML = `Pokeballs: ${captureAmount}`
         })
         const lookAroundButton = qs("#look-around");
         lookAroundButton.addEventListener("click", () => {
@@ -107,7 +119,12 @@ export default class CatchPokemon {
         if (this.getRndInteger(0, 255) < this.pokemonSpecies.capture_rate) {
             backpack.push(this.pokemon);
             msg.innerHTML = `${toProperCase(this.pokemon.name)} captured`
-            setLocalStorage("backpack", backpack)
+            try {
+                setLocalStorage("backpack", backpack)
+            } catch (e) {
+                console.log(e)
+                msg.innerHTML = `Backpack full. Ran out of pokemon space`
+            }
             return true
         } else {
             msg.innerHTML = `${toProperCase(this.pokemon.name)} escaped`
