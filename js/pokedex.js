@@ -20,7 +20,7 @@ loadHeaderFooter(() => {
   const nav = qs("nav")
 
   dropdown.addEventListener("click", () => {
-    nav.classList.toggle("collapsed");
+    nav.classList.toggle("wide-appearables");
   })
 });
 

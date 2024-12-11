@@ -26,7 +26,13 @@ export default class PokemonDetails {
             favorite.classList.toggle("favorite")
             this.addToFavorites();
         })
-
+        const imageSwitchers = document.querySelectorAll(".switch-img")
+        imageSwitchers.forEach(imageSwitcher => {
+            imageSwitcher.addEventListener("click", () => {
+                this.switchImage(this.pokemon.sprites[imageSwitcher.innerText.toLowerCase()])
+            })
+        })
+        
         console.log(this.pokemon);
         //console.log(this.pokemonEvoChain.chain.species.name)// this is what you should use to catch pokemon because you don't find eveloved stuff in some areas maybe
         //console.log(this.pokemonSpecies.flavor_text_entries.length) // make the flavor text choosable by a drop down maybe
@@ -83,9 +89,11 @@ export default class PokemonDetails {
 
         let sprites = `<ul class="collapsed">`
         for (let key in this.pokemon.sprites) {
-            if (key != "other" && key != "version") {
+            if (key != "other" && key != "versions" & this.pokemon.sprites[key] != null) {
                 sprites += `<li>
-                    ${key}: ${this.pokemon.sprites[key]}
+                    <button class="switch-img">
+                        ${toProperCase(key)}
+                    </button>
                 </li>`
             }
         }
@@ -130,7 +138,7 @@ export default class PokemonDetails {
                 <h2>${toProperCase(this.pokemon.name)}<button id="fav" class="${inBackpack}">Favorite</button></h2>
 
                 <img
-                class=""
+                class="pokemon-image"
                 src="${img}"
                 alt="picture of ${this.pokemon.name}"
                 />
@@ -193,7 +201,7 @@ export default class PokemonDetails {
         }); 
     }
     addToFavorites() {
-        let backpack = getLocalStorage("backpack");
+        let backpack = getLocalStorage("favorites");
 
         if (!Array.isArray(backpack)) {
             backpack = [];
@@ -210,9 +218,9 @@ export default class PokemonDetails {
                 backpack.splice(i, 1)
             }
         }
-        setLocalStorage("backpack", backpack)
+        setLocalStorage("favorites", backpack)
     }
-    checkBackpack(key="backpack") {
+    checkBackpack(key="favorites") {
         let backpack = getLocalStorage(key);
 
         if (!Array.isArray(backpack)) {
@@ -236,5 +244,10 @@ export default class PokemonDetails {
             }
         });
         return shiny
+    }
+    switchImage(imageURL) {
+        const pokemonImage = qs(".pokemon-image")
+
+        pokemonImage.src = imageURL;
     }
 }

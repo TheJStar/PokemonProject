@@ -3,6 +3,7 @@
     --second-forground-color: rgb(228, 228, 228);
     --accent-color: rgb(255, 255, 255);
     --text-color: black;
+    --shiny-color: blue;
 }
 
 html * {
@@ -80,14 +81,17 @@ main {
     grid-template-columns: repeat( auto-fill, minmax(176px, 1fr) ); */
 }
 label {
-    padding-left: 1rem;
+    padding: 1rem;
 }
 input {
     border: 2px solid var(--background-color);
     border-radius: 0.5rem;
-    height: 2rem;
+    height: 3rem;
     margin: 0.5rem 1rem;
     padding: 0 0.5rem;
+}
+p {
+    max-width: 700px;
 }
 /* web componants */
 .block {
@@ -96,6 +100,14 @@ input {
 }
 .divider {
     border-bottom: 3px var(--text-color) solid;
+}
+#msg {
+    padding: 1rem;
+    margin:  0 0 1rem 0;
+    background-color: var(--second-forground-color);
+    color: var(--text-color);
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 /* page list */
 .pages {
@@ -167,12 +179,18 @@ input {
     position: relative;
     left: 10px;
 }
+
+/* wide appear narrow disappear */
+.wide-appearables {
+    display: block;
+}
 /* Pokemon */
 /*      Cards */
 .pokemon-cards, .pokemon-caught {
     display: flex;
     flex-direction: column;
 
+    background-color: white;
     border-radius: 1.3rem;
     box-shadow: 0 0 10px var(--second-forground-color);
     transition: box-shadow 1s;
@@ -257,7 +275,45 @@ input {
 }
 /* Pokemon type markups */
 .shiny {
-    border: 0.3rem solid gold;
+    /* border: 0.3rem solid gold; */
+    border-radius: 1rem;
+    position: relative;
+    box-sizing: border-box;
+
+    transition: all 1s;
+}
+.shiny:hover {
+    box-shadow: 0 0 1rem var(--shiny-color);
+    transition: all 1s;
+
+    
+}
+.shiny::before {
+    padding: 7px;
+    width: 100%;
+    height:100%;
+    top: -7px;
+    left: -7px;
+    position:absolute;
+    z-index:-1;
+
+    content: "";
+
+    border-radius: 1rem;
+    background-image: linear-gradient(to bottom, var(--shiny-color) 0%, white 50%, var(--shiny-color) 100%);
+
+    animation: shine;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes shine {
+    0%, 100% {
+        box-shadow: 0 0 1rem var(--shiny-color);
+    }
+    50% {
+        box-shadow: 0 0 2rem var(--shiny-color);
+    }
 }
 
 .normal::before {
@@ -319,6 +375,7 @@ input {
     margin: auto;
     max-width: 700px;
     border: 0.2rem solid var(--background-color);
+    background-color: white;
 }
 .pokemon-detail img {
     display: block;
@@ -329,6 +386,7 @@ input {
 .pokemon-detail button {
     border: none;
     background-color: white;
+    font-size: medium;
 }
 .notfavorite::after {
     content: "⭕";
@@ -350,5 +408,8 @@ input {
     .nav-dropdown::before {
         content: "☰";
         font-size: xx-large;
+    }
+    .wide-appearables {
+        display: none;
     }
   }

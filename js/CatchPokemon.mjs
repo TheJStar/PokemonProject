@@ -31,9 +31,23 @@ export default class CatchPokemon {
 
         this.renderPokemon(selector);
 
-        const button = qs("#catch");
-        button.addEventListener("click", () => {
-            this.capturePokemon()
+        let captureAmount = 3;
+
+        const catchButton = qs("#catch");
+        catchButton.addEventListener("click", () => {
+            if (captureAmount > 0) {
+                let captured = this.capturePokemon()
+                if (captured) {
+                    this.reset()
+                }
+            } else {
+                this.reset()
+            }
+            captureAmount--
+        })
+        const lookAroundButton = qs("#look-around");
+        lookAroundButton.addEventListener("click", () => {
+            this.reset()
         })
     }
     async renderPokemon(selector) {
@@ -70,7 +84,7 @@ export default class CatchPokemon {
                 </a>
                 <div>
                     <button id="catch">Catch</button>
-                    <a href="./" id="look-around">Look Around</a>
+                    <button id="look-around">Look Around</button>
                 </div>
                 ${types}
             </section>
@@ -81,7 +95,7 @@ export default class CatchPokemon {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
     capturePokemon() {
-        let backpack = getLocalStorage("caugth-pokemon");
+        let backpack = getLocalStorage("backpack");
         const msg = qs("#msg")
 
         if (!Array.isArray(backpack)) {
@@ -93,10 +107,16 @@ export default class CatchPokemon {
         if (this.getRndInteger(0, 255) < this.pokemonSpecies.capture_rate) {
             backpack.push(this.pokemon);
             msg.innerHTML = `${toProperCase(this.pokemon.name)} captured`
+            setLocalStorage("backpack", backpack)
+            return true
         } else {
             msg.innerHTML = `${toProperCase(this.pokemon.name)} escaped`
+            return false
         }
-
-        setLocalStorage("caugth-pokemon", backpack)
+    }
+    reset() {
+        this.init(".tall-grass")
+        const msg = qs("#msg")
+        msg.innerHTML = ``
     }
 }

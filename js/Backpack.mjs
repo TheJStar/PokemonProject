@@ -9,7 +9,7 @@ export default class Backpack {
     }
     async init() {
         //the list is from 1-1025 & 10001-10277
-        this.pokemons = getLocalStorage("backpack");
+        this.pokemons = getLocalStorage("backpack") || [];
         const main = qs("main");
         // makes a grid (remove later and change the media size in css)
         main.style.display = "grid";
@@ -30,13 +30,19 @@ export default class Backpack {
             types += `</ul>`
             
             let img;
+            let shinyClass = "";
             if (pokemon.sprites.front_default == null) {
                 img = "../images/image-missing.png"
             }else{
-                img = pokemon.sprites.front_default
+                if (pokemon.shiny) {
+                    img = pokemon.sprites.front_shiny
+                    shinyClass = "shiny"
+                } else {
+                    img = pokemon.sprites.front_default
+                }
             }
             const html = `
-                <section class="pokemon-cards">
+                <section class="pokemon-cards ${shinyClass}">
                     <a href="../pokemon-page/?category=${this.category}&pokemonId=${pokemon.id}">
                         <h2>${toProperCase(pokemon.name)}</h2>
                         <img 

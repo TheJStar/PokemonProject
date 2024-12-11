@@ -1,4 +1,4 @@
-import Backpack from "./Backpack.mjs";
+import CaugthPokemon from "./Backpack.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import {
   getParams,
@@ -8,14 +8,14 @@ import {
 
 const category = "pokemon";
 const datasource = new ExternalServices(category);
-const backpack = new Backpack(datasource, category);
+const caugthPokemon = new CaugthPokemon(datasource, category);
 
-backpack.init();
+caugthPokemon.init();
 loadHeaderFooter(() => {
   const dropdown = qs(".nav-dropdown")
   const nav = qs("nav")
 
   dropdown.addEventListener("click", () => {
-    nav.classList.toggle("collapsed");
+    nav.classList.toggle("wide-appearables");
   })
 });

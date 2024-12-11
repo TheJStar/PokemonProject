@@ -1,7 +1,7 @@
 import { setClick } from "./utils.mjs";
 import { setLocalStorage, getLocalStorage, qs, renderWithTemplate, toProperCase } from "./utils.mjs";
 
-export default class CaugthPokemon {
+export default class Favorites {
     constructor(datasource, category) {
         this.datasource = datasource;
         this.category = category;
@@ -9,7 +9,7 @@ export default class CaugthPokemon {
     }
     async init() {
         //the list is from 1-1025 & 10001-10277
-        this.pokemons = getLocalStorage("caugth-pokemon") || [];
+        this.pokemons = getLocalStorage("favorites");
         const main = qs("main");
         // makes a grid (remove later and change the media size in css)
         main.style.display = "grid";
@@ -30,19 +30,13 @@ export default class CaugthPokemon {
             types += `</ul>`
             
             let img;
-            let shinyClass = "";
             if (pokemon.sprites.front_default == null) {
                 img = "../images/image-missing.png"
             }else{
-                if (pokemon.shiny) {
-                    img = pokemon.sprites.front_shiny
-                    shinyClass = "shiny"
-                } else {
-                    img = pokemon.sprites.front_default
-                }
+                img = pokemon.sprites.front_default
             }
             const html = `
-                <section class="pokemon-cards ${shinyClass}">
+                <section class="pokemon-cards">
                     <a href="../pokemon-page/?category=${this.category}&pokemonId=${pokemon.id}">
                         <h2>${toProperCase(pokemon.name)}</h2>
                         <img 
