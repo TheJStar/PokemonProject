@@ -12,6 +12,7 @@ export default class PokemonList {
     async init() {
         //the list is from 1-1025 & 10001-10277
         this.pokemons = await this.datasource.getData(this.category, this.offset, this.limit);
+        // console.log(this.pokemons.results.length)
         const main = qs("main");
         // makes a grid (remove later and change the media size in css)
         main.style.display = "grid";
@@ -54,7 +55,7 @@ export default class PokemonList {
                 </section>
             `
             renderWithTemplate(html, element, "beforeEnd")
-        }); 
+        });
     }
     async renderPokemonsBySearch(selector, value) {
         this.pokemons = await this.datasource.getData(this.category, 0, this.pokemons.count);
@@ -107,7 +108,7 @@ export default class PokemonList {
 
         let html = `<ul>`;
         for (let i = 0; i < (this.pokemons.count/pageLength); i++) {
-            html += `<li><a href="../pokedex/?offset=${i*pageLength}&limit=${(i+1)*pageLength}">${i+1}</a></li>`
+            html += `<li><a href="../pokedex/?offset=${i*pageLength}&limit=${pageLength}">${i+1}</a></li>`
         }
         html += `</ul>`;
         renderWithTemplate(html, element, "afterBegin")
